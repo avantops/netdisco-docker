@@ -88,7 +88,7 @@ jobs:
           command: |
             source /tmp/workspace/bash_env
             docker load -i /tmp/workspace/netdisco-base.tar
-            docker tag ${IMAGE_ROOT}-base netdisco/${IMAGE_ROOT}-base
+            docker tag ${IMAGE_ROOT}-base avantops/${IMAGE_ROOT}-base
       - run:
           name: Build netdisco-backend
           command: |
@@ -115,7 +115,7 @@ jobs:
           command: |
             source /tmp/workspace/bash_env
             docker load -i /tmp/workspace/netdisco-base.tar
-            docker tag ${IMAGE_ROOT}-base netdisco/${IMAGE_ROOT}-base
+            docker tag ${IMAGE_ROOT}-base avantops/${IMAGE_ROOT}-base
       - run:
           name: Build netdisco-web
           command: |
@@ -142,7 +142,7 @@ jobs:
           command: |
             source /tmp/workspace/bash_env
             docker load -i /tmp/workspace/netdisco-backend.tar
-            docker tag ${IMAGE_ROOT}-backend netdisco/${IMAGE_ROOT}-backend
+            docker tag ${IMAGE_ROOT}-backend avantops/${IMAGE_ROOT}-backend
       - run:
           name: Build netdisco-do
           command: |
@@ -175,8 +175,8 @@ jobs:
           command: |
             source /tmp/workspace/bash_env
             for image in postgresql backend web do; do
-              docker tag ${IMAGE_ROOT}-$image netdisco/${IMAGE_ROOT}-$image
-              docker tag ${IMAGE_ROOT}-$image netdisco/netdisco:latest-$image
+              docker tag ${IMAGE_ROOT}-$image avantops/${IMAGE_ROOT}-$image
+              docker tag ${IMAGE_ROOT}-$image avantops/netdisco:latest-$image
             done
       - run:
           name: Upload all images
@@ -184,8 +184,8 @@ jobs:
             source /tmp/workspace/bash_env
             docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
             for image in postgresql backend web do; do
-              docker push netdisco/${IMAGE_ROOT}-$image
-              docker push netdisco/netdisco:latest-$image
+              docker push avantops/${IMAGE_ROOT}-$image
+              docker push avantops/netdisco:latest-$image
             done
       - run:
           name: Trigger MicroBadger Index

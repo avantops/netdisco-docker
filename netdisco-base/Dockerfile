@@ -28,7 +28,7 @@ RUN curl -sL -o /tmp/cpanm https://cpanmin.us/ && \
 
 WORKDIR /home/netdisco
 RUN PERL5LIB='.' /tmp/cpanm --quiet --notest --local-lib ./perl5 \
-  "https://github.com/netdisco/netdisco.git@${COMMITTISH}" && \
+  "https://github.com/avantops/netdisco.git@${COMMITTISH}" && \
   mv /home/netdisco /home/netdisco-build
 
 # ----------------------------------------------------------------------------
@@ -42,10 +42,10 @@ LABEL org.label-schema.docker.schema-version="1.0" \
       org.label-schema.url="http://netdisco.org" \
       org.label-schema.name="Netdisco Base" \
       org.label-schema.description="Base Image for Netdisco" \
-      org.label-schema.usage="https://github.com/netdisco/netdisco-docker/blob/master/README.md" \
+      org.label-schema.usage="https://github.com/avantops/netdisco-docker/blob/master/README.md" \
       org.label-schema.version=${COMMITTISH} \
       org.label-schema.vcs-ref=${COMMITTISH} \
-      org.label-schema.vcs-url="git://github.com/netdisco/netdisco.git" \
+      org.label-schema.vcs-url="git://github.com/avantops/netdisco.git" \
       org.label-schema.build-date=${BUILD_DATE} \
       org.netdisco.maintainer="The Netdisco Project" \
       org.netdisco.version=${COMMITTISH}
