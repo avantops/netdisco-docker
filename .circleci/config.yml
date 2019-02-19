@@ -14,10 +14,8 @@ references:
 
   tag_filter: &tag_filter
     filters:
-      tags:
-        only: /^2\.[0-9]{6}/
       branches:
-        ignore: /.*/
+        only: avant-deploy
 
 jobs:
   environment-setup:
