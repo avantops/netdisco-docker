@@ -60,7 +60,10 @@ RUN apk add --no-cache \
       perl-io-socket-ssl \
       perl-ldap \
       postgresql-client \
-      shadow
+      shadow \
+      perl-graphviz \
+      graphviz \
+      perl-graph
 
 RUN groupadd -r netdisco -g 901 && \
     useradd -u 901 -r -p x -g netdisco -m -d /home/netdisco -s /bin/ash -c "netdisco user" netdisco
