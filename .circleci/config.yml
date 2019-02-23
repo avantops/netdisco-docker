@@ -185,9 +185,6 @@ jobs:
               docker push avantops/${IMAGE_ROOT}-$image
               docker push avantops/netdisco:latest-$image
             done
-      - run:
-          name: Trigger MicroBadger Index
-          command: curl -sL -X POST ${MICROBADGER_TRIGGER}
 
 workflows:
   version: 2
