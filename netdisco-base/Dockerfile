@@ -24,11 +24,12 @@ RUN apk add --no-cache \
 
 WORKDIR /tmp
 RUN curl -sL -o /tmp/cpanm https://cpanmin.us/ && \
-  chmod +x /tmp/cpanm && \
-  /tmp/cpanm --notest git://github.com/avantops/snmp-info.git@avant-deploy
+  chmod +x /tmp/cpanm
 
 WORKDIR /home/netdisco
 RUN PERL5LIB='.' /tmp/cpanm --quiet --notest --local-lib ./perl5 \
+  "git://github.com/avantops/snmp-info.git@avant-deploy" && \
+  PERL5LIB='.' /tmp/cpanm --quiet --notest --local-lib ./perl5 \
   "https://github.com/avantops/netdisco.git@avant-deploy" && \
   mv /home/netdisco /home/netdisco-build
 
