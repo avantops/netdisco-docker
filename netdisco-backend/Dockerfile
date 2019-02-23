@@ -13,9 +13,12 @@ RUN apk add --no-cache \
       tar
 
 WORKDIR /home/netdisco/netdisco-mibs
-RUN curl -sL https://api.github.com/repos/avantops/netdisco-mibs/tags | \
-  jq '.[]|.tarball_url|select(test("tarball/\\d+\\.\\d+$"))' | \
-  sort -rg | head -n1 | xargs -n1 curl -sL | tar --strip-components=1 -zxf - && \
+# RUN curl -sL https://api.github.com/repos/avantops/netdisco-mibs/tags | \
+#   jq '.[]|.tarball_url|select(test("tarball/\\d+\\.\\d+$"))' | \
+#   sort -rg | head -n1 | xargs -n1 curl -sL | tar --strip-components=1 -zxf - && \
+#   chown -R netdisco:netdisco /home/netdisco/netdisco-mibs
+RUN curl -sL https://github.com/avantops/netdisco-mibs/tarball/avant-deploy | \
+  tar --strip-components=1 -zxf - && \
   chown -R netdisco:netdisco /home/netdisco/netdisco-mibs
 
 USER netdisco:netdisco

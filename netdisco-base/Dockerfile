@@ -24,11 +24,12 @@ RUN apk add --no-cache \
 
 WORKDIR /tmp
 RUN curl -sL -o /tmp/cpanm https://cpanmin.us/ && \
-  chmod +x /tmp/cpanm
+  chmod +x /tmp/cpanm && \
+  /tmp/cpanm --notest git://github.com/avantops/snmp-info.git@avant-deploy
 
 WORKDIR /home/netdisco
 RUN PERL5LIB='.' /tmp/cpanm --quiet --notest --local-lib ./perl5 \
-  "https://github.com/avantops/netdisco.git@${COMMITTISH}" && \
+  "https://github.com/avantops/netdisco.git@avant-deploy" && \
   mv /home/netdisco /home/netdisco-build
 
 # ----------------------------------------------------------------------------
@@ -38,7 +39,7 @@ ARG BUILD_DATE
 ARG COMMITTISH=HEAD
 
 LABEL org.label-schema.docker.schema-version="1.0" \
-      org.label-schema.vendor="The Netdisco Project" \
+      org.label-schema.vendor="The Netdisco Project (Avant Patches)" \
       org.label-schema.url="http://netdisco.org" \
       org.label-schema.name="Netdisco Base" \
       org.label-schema.description="Base Image for Netdisco" \
@@ -47,7 +48,7 @@ LABEL org.label-schema.docker.schema-version="1.0" \
       org.label-schema.vcs-ref=${COMMITTISH} \
       org.label-schema.vcs-url="git://github.com/avantops/netdisco.git" \
       org.label-schema.build-date=${BUILD_DATE} \
-      org.netdisco.maintainer="The Netdisco Project" \
+      org.netdisco.maintainer="The Netdisco Project (Avant Patches)" \
       org.netdisco.version=${COMMITTISH}
 
 RUN apk add --no-cache \
